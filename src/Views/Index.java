@@ -15,6 +15,7 @@ public class Index extends View {
         Dotenv dotenv = Dotenv.load();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        // Using dotenv to get app name
         String title = dotenv.get("APP_NAME");
         JLabel titleLabel = new JLabel(title);
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
