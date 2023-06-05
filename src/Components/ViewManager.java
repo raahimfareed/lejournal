@@ -6,6 +6,7 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 public class ViewManager extends JPanel {
+    // Singleton instance
     public static ViewManager instance = null;
 
     public static ViewManager getInstance() {
@@ -16,6 +17,7 @@ public class ViewManager extends JPanel {
         return ViewManager.instance;
     }
 
+    // List of all registered views
     private Dictionary<String, View> views = new Hashtable<>();
     public ViewManager() {
         this.setLayout(new CardLayout());

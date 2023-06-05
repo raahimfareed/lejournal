@@ -11,6 +11,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 public class Index extends View {
     public Index() {
+        // Load dotenv variables for use
         Dotenv dotenv = Dotenv.load();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -29,6 +30,7 @@ public class Index extends View {
         this.add(button);
         this.add(Box.createVerticalGlue());
 
+        // Get the view manager to be used for button event
         ViewManager viewManager = ViewManager.getInstance();
         CardLayout cardLayout = (CardLayout) viewManager.getLayout();
         button.setOnAction(actionEvent -> cardLayout.show(viewManager, "Dashboard"));
