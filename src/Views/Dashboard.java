@@ -5,6 +5,8 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Dashboard extends View {
     public Dashboard() {
@@ -37,13 +39,43 @@ public class Dashboard extends View {
         this.add(sidebar, BorderLayout.WEST);
 
 
-
-
         JPanel main = new JPanel();
+        main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
         JLabel greeting = new JLabel("Hey there :D");
         Font greetingFont = new Font("Poppins", Font.BOLD, 24);
         greeting.setFont(greetingFont);
+        final int[] seconds = {0};
+        JLabel timeLabel = new JLabel("0 seconds");
+        JLabel timeHeading = new JLabel("Time Spent");
+        Font timeFont = new Font("Poppins", Font.BOLD, 14);
+        timeHeading.setFont(timeFont);
+
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ++seconds[0];
+                if (seconds[0] < 60) {
+                    timeLabel.setText(String.format("%d seconds", seconds[0]));
+                    return;
+                }
+
+                if (seconds[0] / 60 < 60) {
+                    timeLabel.setText(String.format("%d minutes", seconds[0] / 60));
+                    return;
+                }
+
+                timeLabel.setText(String.format("%d hours", seconds[0] / (60 * 60)));
+            }
+        });
+        timer.start();
+
+
+        main.add(Box.createVerticalStrut(10));
         main.add(greeting);
+        main.add(Box.createVerticalStrut(10));
+        main.add(timeHeading);
+        main.add(timeLabel);
+        main.add(Box.createHorizontalStrut(5));
         this.add(main, BorderLayout.CENTER);
     }
 }
