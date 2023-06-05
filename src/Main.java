@@ -49,7 +49,7 @@ public class Main {
             frame.setSize(width, height);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-            ViewManager viewManager = new ViewManager();
+            ViewManager viewManager = ViewManager.getInstance();
 
             CardLayout cardLayout = (CardLayout) viewManager.getLayout();
 
