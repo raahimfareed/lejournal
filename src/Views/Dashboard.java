@@ -40,6 +40,10 @@ public class Dashboard extends View {
 
 
         JPanel main = new JPanel();
+        JLabel greeting = new JLabel("Hey there :D");
+        Font greetingFont = new Font("Poppins", Font.BOLD, 24);
+        greeting.setFont(greetingFont);
+        main.add(greeting);
         this.add(main, BorderLayout.CENTER);
     }
 }
