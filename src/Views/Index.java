@@ -5,6 +5,8 @@ import Components.View;
 
 import javax.swing.*;
 import java.awt.*;
+
+import Components.ViewManager;
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class Index extends View {
@@ -26,5 +28,9 @@ public class Index extends View {
         this.add(Box.createVerticalStrut(5));
         this.add(button);
         this.add(Box.createVerticalGlue());
+
+        ViewManager viewManager = ViewManager.getInstance();
+        CardLayout cardLayout = (CardLayout) viewManager.getLayout();
+        button.setOnAction(actionEvent -> cardLayout.show(viewManager, "Dashboard"));
     }
 }

@@ -1,4 +1,3 @@
-import Views.Index;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 
@@ -9,11 +8,11 @@ import java.awt.*;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.List;
 
-import Components.Button;
+import Components.ViewManager;
 import Components.View;
 
+import Views.Index;
 import Views.Dashboard;
 
 public class Main {
@@ -49,7 +48,7 @@ public class Main {
             frame.setSize(width, height);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-            ViewManager viewManager = new ViewManager();
+            ViewManager viewManager = ViewManager.getInstance();
 
             CardLayout cardLayout = (CardLayout) viewManager.getLayout();
 
