@@ -15,13 +15,14 @@ public class Index extends View {
         Dotenv dotenv = Dotenv.load();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        // Using dotenv to get app name
         String title = dotenv.get("APP_NAME");
         JLabel titleLabel = new JLabel(title);
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         Font panelFont = new Font("Poppins", Font.BOLD, 24);
         titleLabel.setFont(panelFont);
 
-        Components.Button button = new Button("Enter");
+        Button button = new Button("Enter");
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         this.add(Box.createVerticalGlue());
