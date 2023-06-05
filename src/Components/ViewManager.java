@@ -1,9 +1,9 @@
+package Components;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Dictionary;
 import java.util.Hashtable;
-
-import Components.View;
 
 public class ViewManager extends JPanel {
     public static ViewManager instance = null;
