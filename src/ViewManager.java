@@ -3,13 +3,15 @@ import java.awt.*;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
+import Components.View;
+
 public class ViewManager extends JPanel {
-    private Dictionary<String, JPanel> views = new Hashtable<>();
+    private Dictionary<String, View> views = new Hashtable<>();
     public ViewManager() {
         this.setLayout(new CardLayout());
     }
 
-    public void addView(JPanel view, String name) {
+    public void addView(View view, String name) {
         this.add(view, name);
         views.put(name, view);
     }
