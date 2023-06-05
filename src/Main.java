@@ -20,7 +20,6 @@ public class Main {
     private static final Dictionary<String, View> views = new Hashtable<>() {{
         put("Index", new Index());
         put("Dashboard", new Dashboard());
-//        button.setOnAction(actionEvent -> cardLayout.show(viewManager, "Test"));
     }};
 
     public static void main(String[] args) {
