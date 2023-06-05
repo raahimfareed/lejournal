@@ -6,10 +6,13 @@ import io.github.cdimascio.dotenv.Dotenv;
 import javax.swing.*;
 import java.awt.*;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
 import Components.Button;
+import Components.View;
 
 public class Main {
     public static void main(String[] args) {
@@ -45,8 +48,10 @@ public class Main {
             frame.setSize(width, height);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-            JPanel panel = new JPanel();
-            panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+            ViewManager viewManager = new ViewManager();
+
+            View indexView = new View();
+            indexView.setLayout(new BoxLayout(indexView, BoxLayout.Y_AXIS));
 
             JLabel titleLabel = new JLabel(title);
             titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -56,13 +61,25 @@ public class Main {
             Button button = new Button("Enter");
             button.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-            panel.add(Box.createVerticalGlue());
-            panel.add(titleLabel);
-            panel.add(Box.createVerticalStrut(5));
-            panel.add(button);
-            panel.add(Box.createVerticalGlue());
+            indexView.add(Box.createVerticalGlue());
+            indexView.add(titleLabel);
+            indexView.add(Box.createVerticalStrut(5));
+            indexView.add(button);
+            indexView.add(Box.createVerticalGlue());
 
-            frame.add(panel);
+            View testView = new View();
+            JLabel testLabel = new JLabel("Hello, World!");
+            testView.add(testLabel);
+
+            viewManager.addView(indexView, "Index");
+            viewManager.addView(testView, "Test");
+
+            CardLayout cardLayout = (CardLayout) viewManager.getLayout();
+            cardLayout.show(viewManager, "Index");
+
+            button.setOnAction(actionEvent -> cardLayout.show(viewManager, "Test"));
+
+            frame.add(viewManager);
 
 
             frame.setVisible(true);
