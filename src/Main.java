@@ -1,3 +1,4 @@
+import Views.Index;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 
@@ -5,16 +6,22 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 import javax.swing.*;
 import java.awt.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
+import java.util.Dictionary;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.List;
 
 import Components.Button;
 import Components.View;
 
+import Views.Dashboard;
+
 public class Main {
+    private static final Dictionary<String, View> views = new Hashtable<>() {{
+        put("Index", new Index());
+        put("Dashboard", new Dashboard());
+    }};
+
     public static void main(String[] args) {
         Dotenv dotenv = Dotenv.configure().load();
 
@@ -27,10 +34,11 @@ public class Main {
 
         try {
             UIManager.setLookAndFeel(new FlatIntelliJLaf());
-            FlatIntelliJLaf.setup(new FlatOneDarkIJTheme());
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
+
+        FlatIntelliJLaf.setup(new FlatOneDarkIJTheme());
 
         int width = Integer.parseInt(dotenv.get("WINDOW_WIDTH"));
         int height = Integer.parseInt(dotenv.get("WINDOW_HEIGHT"));
@@ -43,38 +51,21 @@ public class Main {
 
             ViewManager viewManager = new ViewManager();
 
-            View indexView = new View();
-            indexView.setLayout(new BoxLayout(indexView, BoxLayout.Y_AXIS));
-
-            JLabel titleLabel = new JLabel(title);
-            titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-            Font panelFont = new Font("Poppins", Font.BOLD, 24);
-            titleLabel.setFont(panelFont);
-
-            Button button = new Button("Enter");
-            button.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-            indexView.add(Box.createVerticalGlue());
-            indexView.add(titleLabel);
-            indexView.add(Box.createVerticalStrut(5));
-            indexView.add(button);
-            indexView.add(Box.createVerticalGlue());
-
-            View testView = new View();
-            JLabel testLabel = new JLabel("Hello, World!");
-            testView.add(testLabel);
-
-            viewManager.addView(indexView, "Index");
-            viewManager.addView(testView, "Test");
-
             CardLayout cardLayout = (CardLayout) viewManager.getLayout();
+
+            Enumeration<String> keys = Main.views.keys();
+            while (keys.hasMoreElements()) {
+                String key = keys.nextElement();
+                View view = Main.views.get(key);
+
+                SwingUtilities.updateComponentTreeUI(view);
+                viewManager.addView(view, key);
+            }
+
             cardLayout.show(viewManager, "Index");
 
-            button.setOnAction(actionEvent -> cardLayout.show(viewManager, "Test"));
-
             frame.add(viewManager);
-
-
+            frame.setResizable(false);
             frame.setVisible(true);
         });
     }
