@@ -9,6 +9,8 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+import Components.Button;
+
 public class Main {
     public static void main(String[] args) {
         Dotenv dotenv = Dotenv.configure().load();
@@ -51,8 +53,7 @@ public class Main {
             Font panelFont = new Font("Poppins", Font.BOLD, 24);
             titleLabel.setFont(panelFont);
 
-            JButton button = new JButton("Enter");
-            button.setSize(256, 64);
+            Button button = new Button("Enter");
             button.setAlignmentX(Component.CENTER_ALIGNMENT);
 
             panel.add(Box.createVerticalGlue());
