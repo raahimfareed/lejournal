@@ -18,19 +18,12 @@ public class Main {
     public static void main(String[] args) {
         Dotenv dotenv = Dotenv.configure().load();
 
-        try {
-            File fontFile = new File("fonts/Poppins-Regular.ttf");
-            Font customFont = Font.createFont(Font.TRUETYPE_FONT, fontFile);
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(customFont);
+        FontManager.addFont("fonts/Poppins-Regular.ttf", Font.TRUETYPE_FONT);
 
-            Font defaultFont = new Font("Poppins", Font.PLAIN, 12);
-            UIManager.put("Label.font", defaultFont);
-            UIManager.put("Button.font", defaultFont);
-            UIManager.put("TextField.font", defaultFont);
-        } catch (IOException | FontFormatException e) {
-            e.printStackTrace();
-        }
+        Font defaultFont = new Font("Poppins", Font.PLAIN, 12);
+        UIManager.put("Label.font", defaultFont);
+        UIManager.put("Button.font", defaultFont);
+        UIManager.put("TextField.font", defaultFont);
 
         try {
             UIManager.setLookAndFeel(new FlatIntelliJLaf());
