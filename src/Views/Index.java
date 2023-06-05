@@ -22,6 +22,7 @@ public class Index extends View {
         Font panelFont = new Font("Poppins", Font.BOLD, 24);
         titleLabel.setFont(panelFont);
 
+        // Using button component
         Button button = new Button("Enter");
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
 
