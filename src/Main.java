@@ -15,6 +15,8 @@ import Components.View;
 
 import Views.Index;
 import Views.Dashboard;
+
+// These are required for the hibernate example to work
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
