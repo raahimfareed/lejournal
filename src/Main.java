@@ -1,3 +1,4 @@
+import Models.Config;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 
@@ -15,6 +16,11 @@ import Components.View;
 import Views.Index;
 import Views.Dashboard;
 
+// These are required for the hibernate example to work
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
 public class Main {
 
     // All views list
@@ -27,6 +33,29 @@ public class Main {
         // Make sure all environment variables are loaded
         // Also prepares them to be used inside java
         Dotenv dotenv = Dotenv.configure().load();
+
+//        // Test Hibernate
+//        // This is a simple hibernate example
+//        // Create model in Models package
+//        // Refer to Models.Config class for a basic example
+//        // Use the following piece of code to add a record to the database
+//        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//        Session session = sessionFactory.openSession();
+//        Transaction tx = session.beginTransaction();
+//
+//        Config config = new Config();
+//        config.setKey("Test 1");
+//        config.setValue("Value 1");
+//
+//        // Persist adds the record to database
+//        session.persist(config);
+//
+//        // Commit makes sure that database commits the transaction
+//        tx.commit();
+//
+//        // Be sure to close the session and factory
+//        session.close();
+//        sessionFactory.close();
 
         // Register custom font to be used in the program
         FontManager.addFont("fonts/Poppins-Regular.ttf", Font.TRUETYPE_FONT);
