@@ -1,4 +1,5 @@
 import Models.Config;
+import Views.Notes;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 
@@ -27,6 +28,7 @@ public class Main {
     private static final Dictionary<String, View> views = new Hashtable<>() {{
         put("Index", new Index());
         put("Dashboard", new Dashboard());
+        put("Notes", new Notes());
     }};
 
     public static void main(String[] args) {
@@ -39,7 +41,7 @@ public class Main {
 //        // Create model in Models package
 //        // Refer to Models.Config class for a basic example
 //        // Use the following piece of code to add a record to the database
-//        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//        SessionFactory sessionFactory = Components.HibernateUtil.getSessionFactory();
 //        Session session = sessionFactory.openSession();
 //        Transaction tx = session.beginTransaction();
 //
@@ -55,7 +57,6 @@ public class Main {
 //
 //        // Be sure to close the session and factory
 //        session.close();
-//        sessionFactory.close();
 
         // Register custom font to be used in the program
         FontManager.addFont("fonts/Poppins-Regular.ttf", Font.TRUETYPE_FONT);
