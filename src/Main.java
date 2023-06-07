@@ -1,4 +1,5 @@
 import Models.Config;
+import Views.Notes;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 
@@ -27,6 +28,7 @@ public class Main {
     private static final Dictionary<String, View> views = new Hashtable<>() {{
         put("Index", new Index());
         put("Dashboard", new Dashboard());
+        put("Notes", new Notes());
     }};
 
     public static void main(String[] args) {
