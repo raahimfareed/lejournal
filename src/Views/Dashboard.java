@@ -1,12 +1,18 @@
 package Views;
 
+import Components.HibernateUtil;
 import Components.View;
+import Models.Config;
 import io.github.cdimascio.dotenv.Dotenv;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 
 public class Dashboard extends View {
     public Dashboard() {
@@ -38,6 +44,8 @@ public class Dashboard extends View {
 
         this.add(sidebar, BorderLayout.WEST);
 
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
 
         JPanel main = new JPanel();
         main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
@@ -45,15 +53,31 @@ public class Dashboard extends View {
         Font greetingFont = new Font("Poppins", Font.BOLD, 24);
         greeting.setFont(greetingFont);
         final int[] seconds = {0};
+        final Config[] config = {session.createQuery("FROM Config WHERE key = :timeSpent", Config.class)
+                .setParameter("timeSpent", "time_spent")
+                .setMaxResults(1)
+                .uniqueResult()};
+        if (config[0] != null) {
+            seconds[0] = Integer.parseInt(config[0].getValue());
+        }
         JLabel timeLabel = new JLabel("0 seconds");
         JLabel timeHeading = new JLabel("Time Spent");
         Font timeFont = new Font("Poppins", Font.BOLD, 14);
         timeHeading.setFont(timeFont);
 
-        Timer timer = new Timer(1000, new ActionListener() {
+        Timer timer = new Timer(5000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ++seconds[0];
+                seconds[0] += 5;
+                Transaction tx = session.beginTransaction();
+                if (config[0] == null) {
+                    config[0] = new Config("time_spent", Integer.toString(seconds[0]));
+                    session.persist(config[0]);
+                } else {
+                    config[0].setValue(Integer.toString(seconds[0]));
+                    session.merge(config[0]);
+                }
+                tx.commit();
                 if (seconds[0] < 60) {
                     timeLabel.setText(String.format("%d seconds", seconds[0]));
                     return;
@@ -67,8 +91,17 @@ public class Dashboard extends View {
                 timeLabel.setText(String.format("%d hours", seconds[0] / (60 * 60)));
             }
         });
-        timer.start();
 
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                timer.stop();
+
+                session.close();
+            }
+        });
+
+        timer.start();
 
         main.add(Box.createVerticalStrut(10));
         main.add(greeting);
