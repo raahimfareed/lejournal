@@ -39,7 +39,7 @@ public class Main {
 //        // Create model in Models package
 //        // Refer to Models.Config class for a basic example
 //        // Use the following piece of code to add a record to the database
-//        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//        SessionFactory sessionFactory = Components.HibernateUtil.getSessionFactory();
 //        Session session = sessionFactory.openSession();
 //        Transaction tx = session.beginTransaction();
 //
@@ -55,7 +55,6 @@ public class Main {
 //
 //        // Be sure to close the session and factory
 //        session.close();
-//        sessionFactory.close();
 
         // Register custom font to be used in the program
         FontManager.addFont("fonts/Poppins-Regular.ttf", Font.TRUETYPE_FONT);
