@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
    <session-factory>
-      <property name="hibernate.hbm2ddl.auto">create</property>
+<!--      <property name="hibernate.hbm2ddl.auto">create</property>-->
       <mapping class="Models.Config"/>
    </session-factory>
 </hibernate-configuration>
