@@ -28,7 +28,18 @@ public class ViewManager extends JPanel {
         views.put(name, view);
     }
 
-    public JPanel getView(String name) throws NullPointerException {
+    public View getView(String name) throws NullPointerException {
         return views.get(name);
+    }
+
+
+    public void changeView(String name)  {
+        if (views.get(name) == null) {
+            System.out.format("Error: View %s not found\n", name);
+            return;
+        }
+
+        CardLayout cardLayout = (CardLayout) this.getLayout();
+        cardLayout.show(this, name);
     }
 }
