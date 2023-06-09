@@ -1,4 +1,5 @@
 import Models.Config;
+import Views.AddNote;
 import Views.Notes;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
@@ -29,6 +30,7 @@ public class Main {
         put("Index", new Index());
         put("Dashboard", new Dashboard());
         put("Notes", new Notes());
+        put("AddNote", new AddNote());
     }};
 
     public static void main(String[] args) {
