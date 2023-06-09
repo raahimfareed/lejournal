@@ -15,7 +15,7 @@ public class Sidenav extends JPanel {
         CardLayout cardLayout = (CardLayout) viewManager.getLayout();
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setBackground(new Color(255, 255, 255, 10));
+        this.setBackground(new Color(0, 0, 0, 100));
         this.setPreferredSize(new Dimension(200, this.getPreferredSize().height));
 
         JLabel thisHeading = new JLabel(dotenv.get("APP_NAME"));
@@ -28,7 +28,7 @@ public class Sidenav extends JPanel {
         homeBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                cardLayout.show(viewManager, "Dashboard");
+            cardLayout.show(viewManager, "Dashboard");
             }
         });
 
@@ -39,7 +39,7 @@ public class Sidenav extends JPanel {
         notesBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                cardLayout.show(viewManager, "Notes");
+            cardLayout.show(viewManager, "Notes");
             }
         });
 
