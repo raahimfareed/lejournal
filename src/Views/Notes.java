@@ -9,6 +9,8 @@ import org.hibernate.SessionFactory;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,10 +38,26 @@ public class Notes extends View {
         newNoteBtn.setOnAction(actionEvent -> cardLayout.show(viewManager, "AddNote"));
 
         JTable notesTable = new JTable(tableModel);
+        notesTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int row = notesTable.rowAtPoint(e.getPoint());
+                if (row < 0) return;
+
+                int id = (int) notesTable.getValueAt(row, 0);
+                System.out.println(id);
+                viewManager.changeView("AddNote");
+            }
+        });
         JScrollPane scrollPane = new JScrollPane(notesTable);
 
         this.refreshNotes();
         this.renderNotes();
+
+
+        greeting.setAlignmentX(Component.LEFT_ALIGNMENT);
+        newNoteBtn.setAlignmentX(Component.LEFT_ALIGNMENT);
+        scrollPane.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         main.add(Box.createVerticalStrut(10));
         main.add(greeting);

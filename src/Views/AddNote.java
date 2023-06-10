@@ -10,6 +10,7 @@ import Models.Note;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rsyntaxtextarea.Theme;
+import org.fife.ui.rtextarea.RTextScrollPane;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -27,9 +28,7 @@ public class AddNote extends View {
         backBtn.setIcon(icon);
         ViewManager viewManager = ViewManager.getInstance();
         CardLayout cardLayout = (CardLayout) viewManager.getLayout();
-        backBtn.setOnAction(e -> {
-            cardLayout.show(viewManager, "Notes");
-        });
+        backBtn.setOnAction(e -> cardLayout.show(viewManager, "Notes"));
 
         JLabel greeting = new JLabel("Add Note");
 
@@ -44,9 +43,11 @@ public class AddNote extends View {
         JLabel bodyLabel = new JLabel("Body");
         RSyntaxTextArea bodyInput = new RSyntaxTextArea();
         bodyInput.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_MARKDOWN);
-//        bodyInput.setLineWrap(true);
-//        bodyInput.setWrapStyleWord(true);
-//        bodyInput.setPreferredSize(new Dimension(200, 200));
+        bodyInput.setCodeFoldingEnabled(true);
+        bodyInput.setLineWrap(true);
+        bodyInput.setWrapStyleWord(true);
+        JScrollPane scrollPane = new RTextScrollPane(bodyInput);
+        scrollPane.setPreferredSize(new Dimension((int) bodyInput.getPreferredSize().getWidth(), 200));
 
         try {
             Theme theme = Theme.load(getClass().getResourceAsStream("/org/fife/ui/rsyntaxtextarea/themes/dark.xml"));
@@ -65,6 +66,7 @@ public class AddNote extends View {
         bodyLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         bodyInput.setAlignmentX(Component.LEFT_ALIGNMENT);
         submitBtn.setAlignmentX(Component.LEFT_ALIGNMENT);
+        scrollPane.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         main.add(Box.createVerticalStrut(10));
         main.add(backBtn);
@@ -75,7 +77,7 @@ public class AddNote extends View {
         main.add(titleInput);
         main.add(Box.createVerticalStrut(10));
         main.add(bodyLabel);
-        main.add(bodyInput);
+        main.add(scrollPane);
         main.add(Box.createVerticalStrut(10));
         main.add(submitBtn);
         main.add(Box.createHorizontalStrut(5));
