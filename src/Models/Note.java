@@ -29,6 +29,11 @@ public class Note {
     public Note() {
     }
 
+    public Note(String title, String body) {
+        this.title = title;
+        this.body = body;
+    }
+
     public Note(int id, String title, String body, Date createdAt, Date updatedAt) {
         this.id = id;
         this.title = title;
