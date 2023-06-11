@@ -12,5 +12,6 @@
     <orderEntry type="library" name="dotenv-java-3.0.0" level="project" />
     <orderEntry type="library" name="angus-activation-2.0.0" level="project" />
     <orderEntry type="library" name="fifesoft.rsyntaxtextarea" level="project" />
+    <orderEntry type="library" name="commonmark" level="project" />
   </component>
 </module>
