@@ -45,8 +45,10 @@ public class Notes extends View {
                 if (row < 0) return;
 
                 int id = (int) notesTable.getValueAt(row, 0);
-                System.out.println(id);
-                viewManager.changeView("AddNote");
+                ViewNote viewNote = (ViewNote) viewManager.getView("ViewNote");
+                viewNote.loadNote(id);
+                viewNote.render();
+                viewManager.changeView("ViewNote");
             }
         });
         JScrollPane scrollPane = new JScrollPane(notesTable);
