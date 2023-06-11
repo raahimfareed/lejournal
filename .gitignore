@@ -30,3 +30,4 @@ bin/
 
 .env
 hibernate.cfg.xml
+project.iml
