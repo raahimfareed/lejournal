@@ -96,7 +96,7 @@ public class AddNote extends View {
         tx.commit();
         clearInputs(title, body);
         ViewManager viewManager = ViewManager.getInstance();
-        Notes notesView =(Notes) viewManager.getView("Notes");
+        Notes notesView = (Notes) viewManager.getView("Notes");
         notesView.refreshNotes();
         notesView.renderNotes();
         ViewManager.getInstance().changeView("Notes");
