@@ -60,12 +60,22 @@ public class ViewNote extends View {
         this.title.setAlignmentX(Component.LEFT_ALIGNMENT);
         scrollPane.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+        Button updateBtn = new Button("Update");
+        Button deleteBtn = new Button("Delete");
+        deleteBtn.setBackground(new Color(82, 39, 39, 255));
+        deleteBtn.setForeground(new Color(239, 156, 156, 255));
+        JPanel btnContainer = new JPanel(new FlowLayout());
+        btnContainer.add(updateBtn);
+        btnContainer.add(deleteBtn);
+
         main.add(Box.createVerticalStrut(10));
         main.add(backBtn);
         main.add(Box.createVerticalStrut(10));
         main.add(this.title);
         main.add(Box.createVerticalStrut(10));
         main.add(scrollPane);
+        main.add(Box.createVerticalStrut(10));
+        main.add(btnContainer);
         main.add(Box.createVerticalStrut(10));
         main.add(Box.createHorizontalStrut(5));
         this.add(main, BorderLayout.CENTER);
@@ -94,5 +104,9 @@ public class ViewNote extends View {
         String html = renderer.render(document);
         this.editorPane.setText(html);
         this.title.setText(this.note.getTitle());
+    }
+
+    public void delete() {
+        if (this.note == null) return;
     }
 }
