@@ -2,12 +2,12 @@ package Models;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
+import javax.swing.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "addrecord")
+@Table(name = "expenses")
 public class Expense {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class Expense {
     @Column(name = "date", updatable = false)
     private Date date;
 
-    public Expense() {
+    public Expense(JTextField food, JTextField petrol, JTextField credit) {
     }
 
     public Expense(String food, String petrol, String credit) {

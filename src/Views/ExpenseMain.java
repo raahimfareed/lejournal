@@ -11,14 +11,21 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class ExpenseMain extends View {
+    private final String[] columnNames = {"Food", "Petrol", "Credit"};
+    private DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+
     public ExpenseMain() {
         this.setLayout(new BorderLayout());
         this.add(new Sidenav(), BorderLayout.WEST);
+
         ViewManager viewManager = ViewManager.getInstance();
         CardLayout cardLayout = (CardLayout) viewManager.getLayout();
+
         // Create the label and center it
         JLabel title = new JLabel("Expense Tracker");
         title.setHorizontalAlignment(SwingConstants.CENTER);
@@ -26,36 +33,37 @@ public class ExpenseMain extends View {
         this.add(title, BorderLayout.NORTH);
 
         // Create the panel for labels and text fields
-        JPanel main = new JPanel(new GridLayout(0, 3, 5, 0));
-        // Create labels & buttons
-        JLabel petrol = new JLabel("Petrol");
-        JLabel food = new JLabel("Food");
-        JLabel credit = new JLabel("Phone Credit");
-        JButton add_record = new JButton("Add Record");
-        JButton generate = new JButton("Generate Report");
-        // Create text fields
-        JTextField jtf1 = new JTextField();
-        JTextField jtf2 = new JTextField();
-        JTextField jtf3 = new JTextField();
-        main.add(petrol);
-        main.add(food);
-        main.add(credit);
-        main.add(add_record);
-        main.add(jtf1);
-        main.add(jtf2);
-        main.add(jtf3);
-        main.add(generate);
-        this.add(main, BorderLayout.CENTER);
-        add_record.addActionListener(new ActionListener() {
+        JPanel main = new JPanel();
+
+        main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
+        Button expenseBtn = new Button("Add Expense Record");
+        expenseBtn.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(viewManager, "AddRecord");
+            public void mouseClicked(MouseEvent e) {
+                cardLayout.show(viewManager, "AddExpenseRecord");
             }
         });
 
-    }
 
-    public DefaultTableModel getTableModel() {
-        return null;
+        JTable expenseTable = new JTable(tableModel);
+        expenseTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int row = expenseTable.rowAtPoint(e.getPoint());
+                if (row < 0) return;
+
+                int id = (int) expenseTable.getValueAt(row, 0);
+                System.out.println(id);
+                viewManager.changeView("AddExpenseRecord");
+            }
+        });
+        JScrollPane scrollPane = new JScrollPane(expenseTable);
+        main.add(Box.createVerticalStrut(10));
+        main.add(expenseBtn);
+        main.add(Box.createVerticalStrut(10));
+        main.add(scrollPane);
+        main.add(Box.createHorizontalStrut(5));
+        this.add(main, BorderLayout.CENTER);
+
     }
 }
