@@ -15,6 +15,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.Calendar;
 import java.awt.event.*;
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -74,27 +75,26 @@ public class CalendarApp extends View {
         dateFields = new JTextField[6][6];
         todoFields = new JTextArea[6][6];
 
-        UIManager.put("TextField.background", new Color(40, 40, 40));
-        UIManager.put("TextField.foreground", Color.WHITE);
-        UIManager.put("TextField.border", BorderFactory.createEmptyBorder(5, 10, 5, 10));
-
-        UIManager.put("TextArea.background", new Color(60, 60, 60));
-        UIManager.put("TextArea.foreground", Color.WHITE);
-        UIManager.put("TextArea.border", BorderFactory.createEmptyBorder(5, 10, 5, 10));
-        calendarPanel.setBackground(new Color(30, 30, 30));
 
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
                 dateFields[i][j] = new JTextField();
                 dateFields[i][j].setEditable(false);
-                dateFields[i][j].setBackground(Color.WHITE);
-
+                dateFields[i][j].setBackground(new Color(38,38,38));
+                dateFields[i][j].setBorder(BorderFactory.createEmptyBorder());
+                dateFields[i][j].setForeground(Color.white);
+                dateFields[i][j].setHorizontalAlignment(SwingConstants.CENTER);
+                
                 todoFields[i][j] = new JTextArea();
                 todoFields[i][j].setLineWrap(true);
+                todoFields[i][j].setForeground(Color.white);
+                todoFields[i][j].setBackground(new Color(128,128,128));
                 todoFields[i][j].setWrapStyleWord(true);
+
 
                 JPanel cellPanel = new JPanel(new BorderLayout());
                 cellPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                cellPanel.setBackground(new Color(38, 38, 38));
 
                 cellPanel.add(dateFields[i][j], BorderLayout.NORTH);
                 cellPanel.add(todoFields[i][j], BorderLayout.CENTER);
