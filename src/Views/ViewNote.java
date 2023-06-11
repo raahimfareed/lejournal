@@ -55,11 +55,6 @@ public class ViewNote extends View {
         this.title.setFont(titleFont);
 //        scrollPane.setPreferredSize(new Dimension((int) bodyInput.getPreferredSize().getWidth(), 200));
 
-        backBtn.setAlignmentX(Component.LEFT_ALIGNMENT);
-        this.editorPane.setAlignmentX(Component.LEFT_ALIGNMENT);
-        this.title.setAlignmentX(Component.LEFT_ALIGNMENT);
-        scrollPane.setAlignmentX(Component.LEFT_ALIGNMENT);
-
         Button updateBtn = new Button("Update");
         Button deleteBtn = new Button("Delete");
         deleteBtn.setBackground(new Color(82, 39, 39, 255));
@@ -67,6 +62,12 @@ public class ViewNote extends View {
         JPanel btnContainer = new JPanel(new FlowLayout());
         btnContainer.add(updateBtn);
         btnContainer.add(deleteBtn);
+
+        backBtn.setAlignmentX(Component.LEFT_ALIGNMENT);
+        this.editorPane.setAlignmentX(Component.LEFT_ALIGNMENT);
+        this.title.setAlignmentX(Component.LEFT_ALIGNMENT);
+        scrollPane.setAlignmentX(Component.LEFT_ALIGNMENT);
+        btnContainer.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         main.add(Box.createVerticalStrut(10));
         main.add(backBtn);
