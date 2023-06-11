@@ -42,6 +42,7 @@ public class Sidenav extends JPanel {
             cardLayout.show(viewManager, "Notes");
             }
         });
+
         JLabel expenseBtn1 = new JLabel("Expense Tracker");
         expenseBtn1.setMaximumSize(new Dimension(Integer.MAX_VALUE, expenseBtn1.getPreferredSize().height));
         expenseBtn1.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -53,13 +54,17 @@ public class Sidenav extends JPanel {
             }
         });
 
+        homeBtn.setAlignmentX(Component.LEFT_ALIGNMENT);
+        notesBtn.setAlignmentX(Component.LEFT_ALIGNMENT);
+        expenseBtn1.setAlignmentX(Component.LEFT_ALIGNMENT);
+
         this.add(Box.createVerticalStrut(10));
         this.add(thisHeading);
         this.add(Box.createVerticalStrut(10));
         this.add(homeBtn);
         this.add(Box.createVerticalStrut(10));
         this.add(notesBtn);
-        this.add(Box.createHorizontalStrut(10));
+        this.add(Box.createVerticalStrut(10));
         this.add(expenseBtn1);
         this.add(Box.createHorizontalStrut(10));
     }

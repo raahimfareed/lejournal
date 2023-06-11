@@ -21,16 +21,14 @@ public class AddExpenseRecord extends View {
         CardLayout cardLayout = (CardLayout) viewManager.getLayout();
 
         JLabel title = new JLabel("Expense Record Table ");
-        title.setHorizontalAlignment(SwingConstants.CENTER);
         title.setFont(new Font("Poppins", Font.BOLD, 24));
-        this.add(title, BorderLayout.NORTH);
 
         JPanel main = new JPanel();
         main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
         BackIcon icon = new BackIcon();
         Button backBtn = new Button("");
         backBtn.setIcon(icon);
-        backBtn.setOnAction(e -> cardLayout.show(viewManager, "ExpenseMain"));
+        backBtn.setOnAction(e -> cardLayout.show(viewManager, "Expense"));
 
         // Create labels and text fields
         JLabel label1 = new JLabel("Food");
@@ -42,6 +40,8 @@ public class AddExpenseRecord extends View {
         JLabel label3 = new JLabel("Credit");
         JTextField jtf3 = new JTextField();
 
+        main.add(Box.createVerticalStrut(10));
+        main.add(title);
         // Align labels and text fields using BoxLayout
         main.add(label1);
         main.add(jtf1);
@@ -59,7 +59,9 @@ public class AddExpenseRecord extends View {
 
         main.add(Box.createVerticalStrut(10));
         main.add(addExpense);
+        main.add(Box.createVerticalStrut(10));
         main.add(backBtn);
+        main.add(Box.createHorizontalStrut(5));
         this.add(main, BorderLayout.CENTER);
     }
 

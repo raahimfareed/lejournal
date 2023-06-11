@@ -26,7 +26,6 @@ public class Main {
         put("AddNote", new AddNote());
         put("Expense", new ExpenseMain());
         put("ExpenseRecord", new AddExpenseRecord());
-
     }};
 
     public static void main(String[] args) {

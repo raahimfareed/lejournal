@@ -30,34 +30,19 @@ public class ExpenseMain extends View {
         JLabel title = new JLabel("Expense Tracker");
         title.setHorizontalAlignment(SwingConstants.CENTER);
         title.setFont(new Font("Poppins", Font.BOLD, 24));
-        this.add(title, BorderLayout.NORTH);
 
         // Create the panel for labels and text fields
         JPanel main = new JPanel();
 
         main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
         Button expenseBtn = new Button("Add Expense Record");
-        expenseBtn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                cardLayout.show(viewManager, "AddExpenseRecord");
-            }
-        });
+        expenseBtn.setOnAction(actionEvent -> cardLayout.show(viewManager, "ExpenseRecord"));
 
 
         JTable expenseTable = new JTable(tableModel);
-        expenseTable.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int row = expenseTable.rowAtPoint(e.getPoint());
-                if (row < 0) return;
-
-                int id = (int) expenseTable.getValueAt(row, 0);
-                System.out.println(id);
-                viewManager.changeView("AddExpenseRecord");
-            }
-        });
         JScrollPane scrollPane = new JScrollPane(expenseTable);
+        main.add(Box.createVerticalStrut(10));
+        main.add(title);
         main.add(Box.createVerticalStrut(10));
         main.add(expenseBtn);
         main.add(Box.createVerticalStrut(10));
