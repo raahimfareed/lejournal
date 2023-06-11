@@ -1,4 +1,5 @@
 package Views;
+
 import Components.*;
 
 import javax.swing.*;
@@ -6,10 +7,15 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 import Components.Button;
+import Models.Expense;
+import Models.Note;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
 import java.util.Date;
-public class AddRecord extends View{
+
+public class AddRecord extends View {
     public AddRecord() {
         this.setLayout(new BorderLayout());
         this.add(new Sidenav(), BorderLayout.WEST);
@@ -19,8 +25,7 @@ public class AddRecord extends View{
         title.setFont(new Font("Poppins", Font.BOLD, 24));
         JButton back = new JButton("Back");
         this.add(title, BorderLayout.NORTH);
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
+
         // table model with columns
         String[] columnNames = {"Food", "Petrol", "Credit"};
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
@@ -40,12 +45,30 @@ public class AddRecord extends View{
             };
             tableModel.addRow(rowData);
 
+            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            Session session = sessionFactory.openSession();
 
+            // Begin a transaction
+            session.beginTransaction();
+
+            // Iterate through the rows and save records in the "addrecord" table
+            for (int j = 0; j < rowCount; j++) {
+                Expense expense = new Expense();
+                expense.setId(j + 1);
+                expense.setDate(new Date());
+                expense.setFood((String) expenseTableModel.getValueAt(j, 0));
+                expense.setPetrol((String) expenseTableModel.getValueAt(j, 1));
+                expense.setCredit((String) expenseTableModel.getValueAt(j, 2));
+
+                session.save(expense);
+            }
+
+            // Commit the transaction
+            session.getTransaction().commit();
+
+            // Close the Hibernate session
+            session.close();
         }
-
-// Commit the transaction and close the Hibernate session
-        session.getTransaction().commit();
-        session.close();
 
         // Create the table
         JTable table = new JTable(tableModel);
@@ -55,13 +78,9 @@ public class AddRecord extends View{
 
         // Add the scroll pane to the center of the view
         this.add(Box.createVerticalStrut(10));
-        this.add(back,BorderLayout.WEST);
+        this.add(back, BorderLayout.WEST);
 
         this.add(Box.createHorizontalStrut(5));
         this.add(scrollPane, BorderLayout.CENTER);
-
     }
-
-
-    }
-
+}
