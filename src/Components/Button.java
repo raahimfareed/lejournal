@@ -15,10 +15,10 @@ public class Button extends JButton {
         addActionListener(listener);
     }
 
-    public void removeOnAction() {
+   /* public void removeOnAction() {
         if (this.actionListener == null) return;
 
         removeActionListener(this.actionListener);
         this.actionListener = null;
-    }
+    }*/
 }

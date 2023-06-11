@@ -1,4 +1,3 @@
-import Models.Config;
 import Views.*;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
@@ -15,9 +14,7 @@ import Components.ViewManager;
 import Components.View;
 
 // These are required for the hibernate example to work
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+
 
 public class Main {
 
@@ -27,7 +24,9 @@ public class Main {
         put("Dashboard", new Dashboard());
         put("Notes", new Notes());
         put("AddNote", new AddNote());
-        put("ViewNote", new ViewNote());
+        put("Expense", new ExpenseMain());
+        put("ExpenseRecord", new AddExpenseRecord());
+
     }};
 
     public static void main(String[] args) {
