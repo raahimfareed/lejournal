@@ -4,39 +4,32 @@ import Components.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Date;
 
 import Components.Button;
-import Models.Config;
 import Models.Note;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
-import org.fife.ui.rsyntaxtextarea.Theme;
-import org.fife.ui.rtextarea.RTextScrollPane;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 public class ViewNote extends View {
     private Note note = null;
 
-    private JLabel title;
-    private Parser parser;
-    private HtmlRenderer renderer;
+    private final JLabel title;
+    private final Parser parser;
+    private final HtmlRenderer renderer;
 
-    private JEditorPane editorPane;
+    private final JEditorPane editorPane;
 
     public ViewNote() {
         this.title = new JLabel();
         this.parser = Parser.builder().build();
         this.renderer = HtmlRenderer.builder().build();
-        editorPane = new JEditorPane();
-        editorPane.setContentType("text/html");
-        editorPane.setText("");
-        editorPane.setEditable(false);
+        this.editorPane = new JEditorPane();
+        this.editorPane.setContentType("text/html");
+        this.editorPane.setText("");
+        this.editorPane.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(this.editorPane);
         this.setLayout(new BorderLayout());
         this.add(new Sidenav(), BorderLayout.WEST);
@@ -80,10 +73,6 @@ public class ViewNote extends View {
         main.add(Box.createVerticalStrut(10));
         main.add(Box.createHorizontalStrut(5));
         this.add(main, BorderLayout.CENTER);
-    }
-
-    public Note getNote() {
-        return note;
     }
 
     public void setNote(Note note) {
