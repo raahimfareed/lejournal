@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module version="4">
+  <component name="FacetManager">
+    <facet type="hibernate" name="Hibernate">
+      <configuration>
+        <datasource-map />
+        <naming-strategy-map />
+        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/hibernate.cfg.xml" />
+      </configuration>
+    </facet>
+  </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
@@ -11,5 +20,6 @@
     <orderEntry type="library" name="flatlaf-3.1.1 (2)" level="project" />
     <orderEntry type="library" name="dotenv-java-3.0.0 (2)" level="project" />
     <orderEntry type="library" name="hibernate-commons-annotations-6.0.6.Final (2)" level="project" />
+    <orderEntry type="library" name="mariadb-java-client-3.1.4" level="project" />
   </component>
 </module>
