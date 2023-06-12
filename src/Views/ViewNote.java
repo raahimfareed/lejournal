@@ -25,7 +25,7 @@ public class ViewNote extends View {
 
     private boolean update;
 
-    private Button updateBtn;
+    private final Button updateBtn;
 
     public ViewNote() {
         this.title = new JLabel();
