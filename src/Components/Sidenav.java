@@ -43,12 +43,26 @@ public class Sidenav extends JPanel {
             }
         });
 
+        //added calendarApp button
+        JLabel calendarBtn = new JLabel("To-Do Calendar");
+        calendarBtn.setMaximumSize(new Dimension(Integer.MAX_VALUE, calendarBtn.getPreferredSize().height));
+        calendarBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        calendarBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                cardLayout.show(viewManager, "CalendarApp");
+            }
+        });
+
         this.add(Box.createVerticalStrut(10));
         this.add(thisHeading);
         this.add(Box.createVerticalStrut(10));
         this.add(homeBtn);
         this.add(Box.createVerticalStrut(10));
         this.add(notesBtn);
+        this.add(Box.createVerticalStrut(10));
+        this.add(calendarBtn);
         this.add(Box.createHorizontalStrut(10));
     }
 }

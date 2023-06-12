@@ -1,6 +1,8 @@
 package Views;
 
 import Components.HibernateUtil;
+import Components.Sidenav;
+import Components.ViewManager;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -8,6 +10,8 @@ import org.hibernate.Transaction;
 import Components.View;
 import Models.CalendarData;
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.ui.FlatTextFieldUI;
 import org.hibernate.query.Query;
 
 import javax.swing.*;
@@ -36,11 +40,17 @@ public class CalendarApp extends View {
     };
 
     public CalendarApp() {
+        this.setLayout(new BorderLayout());
+        this.add(new Sidenav(), BorderLayout.WEST);
+
+        ViewManager viewManager = ViewManager.getInstance();
+        CardLayout cardLayout = (CardLayout) viewManager.getLayout();
+
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(800, 600));
 
         monthLabel = new JLabel();
-        monthLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        monthLabel.setFont(new Font("Arial", Font.BOLD, 28));
         monthLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         JButton prevButton = new JButton("Previous");
@@ -84,11 +94,12 @@ public class CalendarApp extends View {
                 dateFields[i][j].setBorder(BorderFactory.createEmptyBorder());
                 dateFields[i][j].setForeground(Color.white);
                 dateFields[i][j].setHorizontalAlignment(SwingConstants.CENTER);
+                dateFields[i][j].setPreferredSize(new Dimension(50, 15));
                 
                 todoFields[i][j] = new JTextArea();
                 todoFields[i][j].setLineWrap(true);
                 todoFields[i][j].setForeground(Color.white);
-                todoFields[i][j].setBackground(new Color(128,128,128));
+                todoFields[i][j].setBackground(new Color(64,64,64));
                 todoFields[i][j].setWrapStyleWord(true);
 
 

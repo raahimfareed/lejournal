@@ -1,6 +1,5 @@
 import Models.Config;
-import Views.AddNote;
-import Views.Notes;
+import Views.*;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 
@@ -15,9 +14,6 @@ import java.util.Hashtable;
 import Components.ViewManager;
 import Components.View;
 
-import Views.Index;
-import Views.Dashboard;
-
 // These are required for the hibernate example to work
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -31,6 +27,7 @@ public class Main {
         put("Dashboard", new Dashboard());
         put("Notes", new Notes());
         put("AddNote", new AddNote());
+        put("CalendarApp", new CalendarApp());
     }};
 
     public static void main(String[] args) {
