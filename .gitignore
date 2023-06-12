@@ -29,5 +29,3 @@ bin/
 .DS_Store
 
 .env
-hibernate.cfg.xml
-project.iml

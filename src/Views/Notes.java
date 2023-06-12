@@ -16,7 +16,7 @@ import java.util.List;
 
 public class Notes extends View {
     private List<Note> notes = new ArrayList<>();
-    private final String[] columnNames = {"ID", "Title", "Created At", "Actions"};
+    private final String[] columnNames = {"ID", "Title", "Created At"};
     private DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
 
     public Notes() {
@@ -81,19 +81,9 @@ public class Notes extends View {
 
     public void renderNotes() {
         tableModel.setRowCount(0);
-        for (int i = 0; i < notes.size(); ++i) {
-            Note note = notes.get(i);
-            // TODO: Make buttons appear
-            Object[] rowData = {note.getId(), note.getTitle(), note.getCreatedAt(), "View/Delete"};
+        for (Note note : notes) {
+            Object[] rowData = {note.getId(), note.getTitle(), note.getCreatedAt()};
             tableModel.addRow(rowData);
-            Button updateBtn = new Button("Update");
-            Button deleteBtn = new Button("Delete");
-            deleteBtn.setBackground(new Color(82, 39, 39, 255));
-            deleteBtn.setForeground(new Color(239, 156, 156, 255));
-            JPanel btnContainer = new JPanel(new FlowLayout());
-            btnContainer.add(updateBtn);
-            btnContainer.add(deleteBtn);
-            tableModel.setValueAt(btnContainer, i, 3);
         }
     }
 }

@@ -13,7 +13,7 @@ public class HibernateUtil {
         try {
             Configuration configuration = new Configuration()
                     .configure()
-                    .setProperty("hibernate.connection.url", String.format("jdbc:mariadb://%s/%s", dotenv.get("DB_HOST"), dotenv.get("DB_NAME")))
+                    .setProperty("hibernate.connection.url", String.format("jdbc:mysql://%s/%s", dotenv.get("DB_HOST"), dotenv.get("DB_NAME")))
                     .setProperty("hibernate.connection.username", dotenv.get("DB_USER"))
                     .setProperty("hibernate.connection.password", dotenv.get("DB_PASS"));
 
