@@ -29,30 +29,39 @@ public class AddExpenseRecord extends View {
         Button backBtn = new Button("");
         backBtn.setIcon(icon);
         backBtn.setOnAction(e -> cardLayout.show(viewManager, "Expense"));
-
-        // Create labels and text fields
-        JLabel label1 = new JLabel("Food");
-        JTextField jtf1 = new JTextField();
-
-        JLabel label2 = new JLabel("Petrol");
-        JTextField jtf2 = new JTextField();
-
-        JLabel label3 = new JLabel("Credit");
-        JTextField jtf3 = new JTextField();
-
         main.add(Box.createVerticalStrut(10));
         main.add(title);
-        // Align labels and text fields using BoxLayout
+
+        JTextField jtf1= new JTextField();
+        jtf1.setColumns(10);
+        JTextField jtf2= new JTextField();
+        JTextField jtf3= new JTextField();
+
+        JLabel label1 = new JLabel("Food");
         main.add(label1);
         main.add(jtf1);
         main.add(Box.createVerticalStrut(10));
 
+        JLabel label2 = new JLabel("Petrol");
         main.add(label2);
         main.add(jtf2);
         main.add(Box.createVerticalStrut(10));
 
+        JLabel label3 = new JLabel("Credit");
         main.add(label3);
         main.add(jtf3);
+
+        label1.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jtf1.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        label2.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jtf2.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        label3.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jtf3.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        main.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
 
         Button addExpense = new Button("Add Expense");
         addExpense.setOnAction(e -> this.createExpense(jtf1, jtf2, jtf3));
