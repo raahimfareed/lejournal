@@ -12,6 +12,7 @@ import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 public class ViewNote extends View {
     private Note note = null;
@@ -22,6 +23,10 @@ public class ViewNote extends View {
 
     private final JEditorPane editorPane;
 
+    private boolean update;
+
+    private Button updateBtn;
+
     public ViewNote() {
         this.title = new JLabel();
         this.parser = Parser.builder().build();
@@ -30,6 +35,8 @@ public class ViewNote extends View {
         this.editorPane.setContentType("text/html");
         this.editorPane.setText("");
         this.editorPane.setEditable(false);
+        this.update = false;
+        this.updateBtn = new Button("Update");
         JScrollPane scrollPane = new JScrollPane(this.editorPane);
         this.setLayout(new BorderLayout());
         this.add(new Sidenav(), BorderLayout.WEST);
@@ -48,13 +55,15 @@ public class ViewNote extends View {
         this.title.setFont(titleFont);
 //        scrollPane.setPreferredSize(new Dimension((int) bodyInput.getPreferredSize().getWidth(), 200));
 
-        Button updateBtn = new Button("Update");
         Button deleteBtn = new Button("Delete");
         deleteBtn.setBackground(new Color(82, 39, 39, 255));
         deleteBtn.setForeground(new Color(239, 156, 156, 255));
         JPanel btnContainer = new JPanel(new FlowLayout());
-        btnContainer.add(updateBtn);
+        btnContainer.add(this.updateBtn);
         btnContainer.add(deleteBtn);
+
+        deleteBtn.setOnAction(e -> this.delete());
+        updateBtn.setOnAction(e -> this.update());
 
         backBtn.setAlignmentX(Component.LEFT_ALIGNMENT);
         this.editorPane.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -98,5 +107,38 @@ public class ViewNote extends View {
 
     public void delete() {
         if (this.note == null) return;
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.remove(this.note);
+        tx.commit();
+        ViewManager viewManager = ViewManager.getInstance();
+        Notes notesView = (Notes) viewManager.getView("Notes");
+        notesView.refreshNotes();
+        notesView.renderNotes();
+        viewManager.changeView("Notes");
+    }
+
+    public void update() {
+        if (this.update) {
+            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            Session session = sessionFactory.openSession();
+            Transaction tx = session.beginTransaction();
+            this.note.setBody(this.editorPane.getText());
+            session.merge(this.note);
+            tx.commit();
+        }
+        this.update = !this.update;
+        this.editorPane.setEditable(this.update);
+        if (this.update) {
+            this.updateBtn.setText("Save");
+            this.editorPane.setContentType("text/plain");
+            this.editorPane.setText(this.note.getBody());
+            return;
+        }
+
+        this.updateBtn.setText("Update");
+        this.editorPane.setContentType("text/html");
+        this.render();
     }
 }
