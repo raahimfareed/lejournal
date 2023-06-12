@@ -1,3 +1,4 @@
+import Models.Config;
 import Views.*;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
@@ -27,6 +28,7 @@ public class Main {
         put("ViewNote", new ViewNote());
         put("Expense", new ExpenseMain());
         put("ExpenseRecord", new AddExpenseRecord());
+        put("CalendarApp", new CalendarApp());
     }};
 
     public static void main(String[] args) {

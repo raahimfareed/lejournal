@@ -3,12 +3,10 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-
-        <property name="hibernate.connection.driver_class">org.mariadb.jdbc.Driver</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.MariaDBDialect</property>
         <property name="hibernate.hbm2ddl.auto">create</property>
         <mapping class="Models.Config"/>
         <mapping class="Models.Note"/>
         <mapping class="Models.Expense"/>
+        <mapping class="Models.CalendarData"/>
     </session-factory>
 </hibernate-configuration>
