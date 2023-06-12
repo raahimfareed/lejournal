@@ -24,6 +24,7 @@ public class Main {
         put("Dashboard", new Dashboard());
         put("Notes", new Notes());
         put("AddNote", new AddNote());
+        put("ViewNote", new ViewNote());
         put("Expense", new ExpenseMain());
         put("ExpenseRecord", new AddExpenseRecord());
     }};
