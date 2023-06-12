@@ -58,6 +58,18 @@ public class Sidenav extends JPanel {
         notesBtn.setAlignmentX(Component.LEFT_ALIGNMENT);
         expenseBtn1.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+        //added calendarApp button
+        JLabel calendarBtn = new JLabel("To-Do Calendar");
+        calendarBtn.setMaximumSize(new Dimension(Integer.MAX_VALUE, calendarBtn.getPreferredSize().height));
+        calendarBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        calendarBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                cardLayout.show(viewManager, "CalendarApp");
+            }
+        });
+
         this.add(Box.createVerticalStrut(10));
         this.add(thisHeading);
         this.add(Box.createVerticalStrut(10));
@@ -66,6 +78,7 @@ public class Sidenav extends JPanel {
         this.add(notesBtn);
         this.add(Box.createVerticalStrut(10));
         this.add(expenseBtn1);
+        this.add(calendarBtn);
         this.add(Box.createHorizontalStrut(10));
     }
 }
