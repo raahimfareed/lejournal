@@ -8,6 +8,7 @@ public class Button extends JButton {
     private ActionListener actionListener;
     public Button(String title) {
         super(title);
+        this.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
     public void setOnAction(ActionListener listener) {
