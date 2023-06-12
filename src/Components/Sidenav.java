@@ -35,7 +35,6 @@ public class Sidenav extends JPanel {
         JLabel notesBtn = new JLabel("Notes");
         notesBtn.setMaximumSize(new Dimension(Integer.MAX_VALUE, notesBtn.getPreferredSize().height));
         notesBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
         notesBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -46,7 +45,6 @@ public class Sidenav extends JPanel {
         JLabel expenseBtn1 = new JLabel("Expense Tracker");
         expenseBtn1.setMaximumSize(new Dimension(Integer.MAX_VALUE, expenseBtn1.getPreferredSize().height));
         expenseBtn1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
         expenseBtn1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -54,21 +52,22 @@ public class Sidenav extends JPanel {
             }
         });
 
-        homeBtn.setAlignmentX(Component.LEFT_ALIGNMENT);
-        notesBtn.setAlignmentX(Component.LEFT_ALIGNMENT);
-        expenseBtn1.setAlignmentX(Component.LEFT_ALIGNMENT);
-
         //added calendarApp button
         JLabel calendarBtn = new JLabel("To-Do Calendar");
         calendarBtn.setMaximumSize(new Dimension(Integer.MAX_VALUE, calendarBtn.getPreferredSize().height));
         calendarBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
         calendarBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 cardLayout.show(viewManager, "CalendarApp");
             }
         });
+
+
+        homeBtn.setAlignmentX(Component.LEFT_ALIGNMENT);
+        notesBtn.setAlignmentX(Component.LEFT_ALIGNMENT);
+        expenseBtn1.setAlignmentX(Component.LEFT_ALIGNMENT);
+        calendarBtn.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         this.add(Box.createVerticalStrut(10));
         this.add(thisHeading);
@@ -78,6 +77,7 @@ public class Sidenav extends JPanel {
         this.add(notesBtn);
         this.add(Box.createVerticalStrut(10));
         this.add(expenseBtn1);
+        this.add(Box.createVerticalStrut(10));
         this.add(calendarBtn);
         this.add(Box.createHorizontalStrut(10));
     }

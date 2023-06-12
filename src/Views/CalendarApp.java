@@ -40,8 +40,6 @@ public class CalendarApp extends View {
     };
 
     public CalendarApp() {
-        this.setLayout(new BorderLayout());
-        this.add(new Sidenav(), BorderLayout.WEST);
 
         ViewManager viewManager = ViewManager.getInstance();
         CardLayout cardLayout = (CardLayout) viewManager.getLayout();
@@ -56,6 +54,7 @@ public class CalendarApp extends View {
         JButton prevButton = new JButton("Previous");
         JButton insert = new JButton("Insert");
         JButton nextButton = new JButton("Next");
+        JButton back = new JButton("Back");
 
         prevButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -66,6 +65,11 @@ public class CalendarApp extends View {
         insert.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 insertTodo();
+            }
+        });
+        back.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(viewManager, "Dashboard");
             }
         });
 
@@ -79,6 +83,7 @@ public class CalendarApp extends View {
         buttonPanel.add(prevButton);
         buttonPanel.add(insert);
         buttonPanel.add(nextButton);
+        buttonPanel.add(back);
 
         calendarPanel = new JPanel(new GridLayout(6, 6));
 
